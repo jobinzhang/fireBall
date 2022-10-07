@@ -7,6 +7,7 @@ public class Tower : MonoBehaviour
     public int height = 20;
     public GameObject brickPrefab;
     public Color[] colers = new Color[2];
+    private List<GameObject> brickList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -16,8 +17,6 @@ public class Tower : MonoBehaviour
 
     private void initTower()
     {
-        // 先将塔整体移动到地下
-        this.transform.Translate(0, -height, 0);
         for (int i = 0;i < height; i ++) {
             // 根据预制体，创建砖块
             GameObject brickGameObj = Instantiate(brickPrefab);
@@ -26,25 +25,48 @@ public class Tower : MonoBehaviour
             brickGameObj.transform.SetParent(this.transform, false);
             // 设置砖块颜色
             brickGameObj.GetComponent<MeshRenderer>().material.color = colers[i % 2];
+            brickList.Add(brickGameObj);
         }
-
-        Debug.Log(this.transform.position.y);
-        while (this.transform.position.y <= 0) {
-            this.transform.Translate(0, 1, 0);
-            Debug.Log(this.transform.position.y);
-        }
-
-        
-        // 结束后整体往下移动0.5单位
-        // this.transform.Translate(0, -0.5f, 0);
+        // 开启协程，上升塔
+        StartCoroutine(riseTower());
     }
 
-
-    
+    IEnumerator riseTower() {
+        // 先将塔整体移动到地下
+        this.transform.Translate(0, -height, 0);
+        while (this.transform.localPosition.y <= -0.5)
+        {
+            this.transform.Translate(0, 5 * Time.deltaTime, 0);
+            yield return null;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
         this.transform.Rotate(0, 45 * Time.deltaTime, 0);
+    }
+
+    // 子弹打到砖块处理方法
+    internal void handleBulletFire()
+    {
+        if (brickList.Count <= 0)
+        {
+            return;
+        }
+        // 获取最底下的砖块
+        GameObject bottomBrick = brickList[0];
+        // 设置砖块放大淡出效果
+        bottomBrick.GetComponent<Brick>().setFadeOut();
+        // 销毁
+        Destroy(bottomBrick, 1);
+        // 将最下面的去掉， 然后整体下移
+        brickList.RemoveAt(0);
+        for (int i = 0; i < brickList.Count; i++)
+        {
+            Vector3 positonV = brickList[i].transform.localPosition;
+            positonV.y = positonV.y - 1;
+            brickList[i].transform.localPosition = positonV;
+        }
     }
 }

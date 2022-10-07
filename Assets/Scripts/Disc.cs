@@ -38,6 +38,10 @@ public class Disc : MonoBehaviour
     {
         // 生成圆环
         ProBuilderMesh archProBM = ShapeGenerator.GenerateArch(PivotLocation.FirstVertex, angle, radius, 0.5f, 1, 20, true, true, true, true, true);
+        // 设置圆环标签
+        archProBM.gameObject.tag = "Arch";
+        // 添加碰撞组件
+        archProBM.gameObject.AddComponent<MeshCollider>();
         // 设置圆环材质
         archProBM.GetComponent<MeshRenderer>().material = archMat;
         Transform archTransfrom = archProBM.GetComponent<Transform>();

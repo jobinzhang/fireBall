@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6638824553159799774}
   - component: {fileID: 2843287402250685052}
   - component: {fileID: 2824765000279586358}
+  - component: {fileID: 717293805505607888}
   m_Layer: 0
   m_Name: CubeBrick
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,3 +94,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &717293805505607888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698115337497636979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0586acf067526c94e84393a7f2b5f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
