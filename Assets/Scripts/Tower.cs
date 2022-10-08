@@ -10,10 +10,13 @@ public class Tower : MonoBehaviour
     public List<GameObject> brickList = new List<GameObject>();
     // 砖块是否正在上升
     public bool isBrickRising = true;
+    private UIRoot uiRoot;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        uiRoot = GameObject.Find("UIRoot").GetComponent<UIRoot>();
         initTower();
     }
 
@@ -38,7 +41,11 @@ public class Tower : MonoBehaviour
         this.transform.Translate(0, -height, 0);
         while (this.transform.localPosition.y <= -0.5)
         {
-            this.transform.Translate(0, 5 * Time.deltaTime, 0);
+            // logo界面加载完在上砖块
+            if (uiRoot.isLogoLoaded)
+            {
+                this.transform.Translate(0, 5 * Time.deltaTime, 0);
+            }
             yield return null;
         }
         isBrickRising = false;
