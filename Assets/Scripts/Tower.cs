@@ -7,7 +7,9 @@ public class Tower : MonoBehaviour
     public int height = 20;
     public GameObject brickPrefab;
     public Color[] colers = new Color[2];
-    private List<GameObject> brickList = new List<GameObject>();
+    public List<GameObject> brickList = new List<GameObject>();
+    // 砖块是否正在上升
+    public bool isBrickRising = true;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,7 @@ public class Tower : MonoBehaviour
             this.transform.Translate(0, 5 * Time.deltaTime, 0);
             yield return null;
         }
+        isBrickRising = false;
     }
 
     // Update is called once per frame

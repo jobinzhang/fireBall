@@ -8,10 +8,12 @@ public class Tank : MonoBehaviour
     public GameObject bulletPos; // 子弹发射位置
     private float lastShotTime;
     private float pressFireButtonTime;
+    private Tower tower; // 砖塔脚本
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        tower = GameObject.FindGameObjectWithTag("tower").GetComponent<Tower>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,12 @@ public class Tank : MonoBehaviour
     // 发射子弹
     private void fire()
     {
+        // 如果塔块正在上升 or 砖块都已经打完，则禁止射击
+        if (tower.isBrickRising || tower.brickList.Count == 0)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0) && (Time.time - lastShotTime) > 0.2) // 按下鼠标左键
         {
             GameObject bullet = Instantiate(bulletPrefab);
