@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bullet : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class Bullet : MonoBehaviour
     {
         // 销毁子弹
         Destroy(this.gameObject);
+        // 跳转到失败场景
+        SceneManager.LoadScene("FailScene");
     }
 
     // 打到砖块

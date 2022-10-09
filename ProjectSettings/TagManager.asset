@@ -9,6 +9,8 @@ TagManager:
   - tower
   - AlphaObj
   - LogoObj
+  - endPos
+  - startPos
   layers:
   - Default
   - TransparentFX

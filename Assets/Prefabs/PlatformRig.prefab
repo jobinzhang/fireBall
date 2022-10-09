@@ -49,6 +49,8 @@ MonoBehaviour:
   colers:
   - {r: 0.7924528, g: 0.26864833, b: 0.04111784, a: 0}
   - {r: 0.072267726, g: 0.4618264, b: 0.5283019, a: 0}
+  brickList: []
+  isBrickRising: 1
 --- !u!1 &5090275135208398642
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +144,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8193813495799916743
 Transform:
@@ -271,7 +273,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8193813496618694247
 Transform:
