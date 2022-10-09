@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Bullet : MonoBehaviour
 {
+    private Tank tank;
     // Start is called before the first frame update
     void Start()
     {
-        
+        tank = GameObject.Find("Tank").GetComponent<Tank>();
     }
 
     // Update is called once per frame
@@ -45,5 +46,7 @@ public class Bullet : MonoBehaviour
         brick.transform.parent.GetComponent<Tower>().handleBulletFire();
         // 销毁子弹
         Destroy(this.gameObject);
+        // 判断是否所有砖块被打完, 移动坦克到下一位置
+        tank.isBrickFiredAndMove();
     }
 }

@@ -6,11 +6,15 @@ TagManager:
   tags:
   - Brick
   - Arch
-  - tower
   - AlphaObj
   - LogoObj
   - endPos
   - startPos
+  - tower1
+  - tower2
+  - tower
+  - Disc1
+  - Disc2
   layers:
   - Default
   - TransparentFX

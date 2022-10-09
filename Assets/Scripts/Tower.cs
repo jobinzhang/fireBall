@@ -10,10 +10,13 @@ public class Tower : MonoBehaviour
     public List<GameObject> brickList = new List<GameObject>();
     // 砖块是否正在上升
     public bool isBrickRising = true;
+    // 当前平台的圆环
+    private Disc disc;
 
     // Start is called before the first frame update
     void Start()
     {
+        disc = this.transform.parent.GetComponentInChildren<Disc>();
         initTower();
     }
 
@@ -53,9 +56,9 @@ public class Tower : MonoBehaviour
     // 子弹打到砖块处理方法
     internal void handleBulletFire()
     {
-        // 砖块全部打完
         if (brickList.Count <= 0)
         {
+            disc.enabled = false;
             return;
         }
         // 获取最底下的砖块
@@ -71,6 +74,11 @@ public class Tower : MonoBehaviour
             Vector3 positonV = brickList[i].transform.localPosition;
             positonV.y = positonV.y - 1;
             brickList[i].transform.localPosition = positonV;
+        }
+        // 砖块全部打完， 影藏当前的圆盘
+        if (brickList.Count <= 0)
+        {
+            disc.gameObject.SetActive(false);
         }
     }
 }

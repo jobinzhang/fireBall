@@ -8,18 +8,22 @@ public class Tank : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject bulletPos; // 子弹发射位置
     private float lastShotTime;
-    private Tower tower; // 砖塔脚本
-    private Transform startPos;
-    private Transform endPos;
+    private Tower tower1; // 砖塔脚本
+    private Tower tower2;
+    private Transform midPos; // 坦克移动的中间位置
+    private Transform endPos; // 坦克移动的最终位置
     private bool isPassStartPos = false; // 坦克是否已经到达第一个位置
     private bool isTankRota = false; // 坦克移动到中间是，是否已经旋转
+    private bool isToEndPos = false; // 坦克是否达到最后的位置
+    private bool isFireTower2 = false; // 开始打第二个砖塔
 
 
     // Start is called before the first frame update
     void Start()
     {
-        tower = GameObject.FindGameObjectWithTag("tower").GetComponent<Tower>();
-        startPos = GameObject.FindGameObjectWithTag("startPos").transform;
+        tower1 = GameObject.FindGameObjectWithTag("tower1").GetComponent<Tower>();
+        tower2 = GameObject.FindGameObjectWithTag("tower2").GetComponent<Tower>();
+        midPos = GameObject.Find("TankMidPos").transform;
         endPos = GameObject.FindGameObjectWithTag("endPos").transform;
     }
 
@@ -28,42 +32,52 @@ public class Tank : MonoBehaviour
     {
         // 射击
         fire();
-        // 判断是否需要移动到下一个平台
-        // moveNextPlatform();
-        moveNextPlatform2();
     }
 
-    void moveNextPlatform2()
+    /**
+     * 判断砖块是否打完，坦克移动到下一个位置
+     */
+    internal void isBrickFiredAndMove()
     {
         // 如果砖块已经打完，则坦克移动到下一个平台位置
-        //if (tower.brickList.Count != 0)
-        //{
-        //    return;
-        //}
-        if (!isPassStartPos)
+        if (tower1.brickList.Count == 0)
         {
-            moveStartPos();
-        }
-        else {
-            moveEndPos();
+            StartCoroutine(moveTankPos());
         }
     }
 
+    IEnumerator moveTankPos()
+    {
+        while (!isToEndPos)
+        {
+            if (!isPassStartPos)
+            {
+                moveStartPos();
+            }
+            else
+            {
+                moveEndPos();
+            }
+            yield return null;
+        }
+        isFireTower2 = true;
+        yield break;
+
+    }
 
     void moveStartPos()
     {
-        float distance = Vector3.Distance(transform.position, startPos.position);
-        print(distance);
-        if (distance < 10.1) // 往第一个点移动
+        
+        if (this.transform.position == midPos.position) // 往第一个点移动
         {
             isPassStartPos = true;
             return;
         }
-        this.transform.position = Vector3.MoveTowards(this.transform.position, startPos.localPosition, Time.deltaTime);
-        //this.transform.Translate(0, 0, 2* Time.deltaTime);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, midPos.position, 10 * Time.deltaTime);
 
     }
 
+    // 坦克往第二个平台的位置移动
     void moveEndPos()
     {
         //
@@ -72,12 +86,30 @@ public class Tank : MonoBehaviour
             isTankRota = true;
             return;
         }
-        this.transform.position = Vector3.MoveTowards(this.transform.position, endPos.position, 2 * Time.deltaTime);
-        
+
+        if (transform.position.x == endPos.position.x) // 是否移动到第二个平台射击位置
+        {
+            isToEndPos = true;
+            return;
+        }
+        this.transform.position = Vector3.MoveTowards(this.transform.position, endPos.position, 10 * Time.deltaTime);
     }
 
     // 发射子弹
     private void fire()
+    {
+        // print(isFireTower2);
+        if (!isFireTower2)
+        {
+            fireTower(tower1); // 打第一块砖塔
+        }
+        else
+        {
+            fireTower(tower2); // 打第二块砖塔
+        }
+    }
+
+    void fireTower(Tower tower)
     {
         // 如果塔块正在上升 or 砖块都已经打完，则禁止射击
         if (tower.isBrickRising || tower.brickList.Count == 0)
