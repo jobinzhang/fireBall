@@ -1,5 +1,2 @@
-Base path: 'D:/software/unity/Unity 2019.4.35f1c1/Editor/Data', plugins path 'D:/software/unity/Unity 2019.4.35f1c1/Editor/Data/PlaybackEngines'
-Cmd: initializeCompiler
-Cmd: shutdown
-
-Quitting shader compiler process
+Base path: 'E:/unity/2019.4.35f1c1/Editor/Data', plugins path 'E:/unity/2019.4.35f1c1/Editor/Data/PlaybackEngines'
+Initialization error: Failed to read D3DCompiler DLL file

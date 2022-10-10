@@ -46,7 +46,7 @@ public class Tower : MonoBehaviour
         this.transform.Translate(0, -height, 0);
         while (this.transform.localPosition.y <= -0.5)
         {
-            this.transform.Translate(0, 1 * Time.deltaTime, 0);
+            this.transform.Translate(0, 5 * Time.deltaTime, 0);
             yield return null;
         }
         isBrickRising = false;

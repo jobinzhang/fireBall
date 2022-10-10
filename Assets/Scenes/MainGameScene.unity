@@ -14165,12 +14165,12 @@ PrefabInstance:
     - target: {fileID: 547942365730055939, guid: f93869921d4a65b418a081a8ac4f1d51,
         type: 3}
       propertyPath: archNumber
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 547942365951992981, guid: f93869921d4a65b418a081a8ac4f1d51,
         type: 3}
       propertyPath: archNumber
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 547942366802836362, guid: f93869921d4a65b418a081a8ac4f1d51,
         type: 3}
@@ -14202,10 +14202,15 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1119172736}
+    - target: {fileID: 5051784896577046283, guid: f93869921d4a65b418a081a8ac4f1d51,
+        type: 3}
+      propertyPath: height
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5051784896799179933, guid: f93869921d4a65b418a081a8ac4f1d51,
         type: 3}
       propertyPath: height
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8515439775154272212, guid: f93869921d4a65b418a081a8ac4f1d51,
         type: 3}
