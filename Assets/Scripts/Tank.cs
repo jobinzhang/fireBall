@@ -12,9 +12,9 @@ public class Tank : MonoBehaviour
     private Tower tower2;
     private Transform midPos; // 坦克移动的中间位置
     private Transform endPos; // 坦克移动的最终位置
-    private bool isPassStartPos = false; // 坦克是否已经到达第一个位置
+    public bool isPassStartPos = false; // 坦克是否已经到达第一个位置
     private bool isTankRota = false; // 坦克移动到中间是，是否已经旋转
-    private bool isToEndPos = false; // 坦克是否达到最后的位置
+    public bool isToEndPos = false; // 坦克是否达到最后的位置
     private bool isFireTower2 = false; // 开始打第二个砖塔
 
 

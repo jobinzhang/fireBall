@@ -15,6 +15,7 @@ TagManager:
   - tower
   - Disc1
   - Disc2
+  - resultImage
   layers:
   - Default
   - TransparentFX

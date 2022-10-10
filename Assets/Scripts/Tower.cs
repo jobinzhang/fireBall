@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class Tower : MonoBehaviour 
 {
     // 塔默认高度
@@ -12,11 +14,14 @@ public class Tower : MonoBehaviour
     public bool isBrickRising = true;
     // 当前平台的圆环
     private Disc disc;
+    private string towerTag;
 
     // Start is called before the first frame update
     void Start()
     {
+        print(this.gameObject.tag);
         disc = this.transform.parent.GetComponentInChildren<Disc>();
+        towerTag = this.gameObject.tag;
         initTower();
     }
 
@@ -75,10 +80,25 @@ public class Tower : MonoBehaviour
             positonV.y = positonV.y - 1;
             brickList[i].transform.localPosition = positonV;
         }
-        // 砖块全部打完， 影藏当前的圆盘
+        // 判断是否胜利
+        isWin();
+    }
+
+    void isWin()
+    {
+        
         if (brickList.Count <= 0)
         {
-            disc.gameObject.SetActive(false);
+            // 第一块砖块全部打完， 影藏当前的圆盘
+            if (towerTag == "tower1")
+            {
+                disc.gameObject.SetActive(false);
+            } else if (towerTag == "tower2") // 第二块砖块全部打完， 则获得胜利
+            {
+                // 跳转到结束场景
+                PlayerPrefs.SetInt("gameResult", 2);
+                SceneManager.LoadScene("EndScene");
+            }
         }
     }
 }

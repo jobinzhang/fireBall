@@ -35,8 +35,9 @@ public class Bullet : MonoBehaviour
     {
         // 销毁子弹
         Destroy(this.gameObject);
-        // 跳转到失败场景
-        SceneManager.LoadScene("FailScene");
+        // 跳转到结束场景
+        PlayerPrefs.SetInt("gameResult", 1);
+        SceneManager.LoadScene("EndScene");
     }
 
     // 打到砖块
