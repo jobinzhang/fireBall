@@ -8,7 +8,7 @@ public class FailUI : MonoBehaviour
 {
     private Button restartBtn;
     private Button exitBtn;
-    private Image image;
+    private GameObject fail;
     private int gameResult = 1; // 游戏闯关结果，1-失败，2-成功
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class FailUI : MonoBehaviour
         gameResult = PlayerPrefs.GetInt("gameResult");
         restartBtn = GameObject.Find("RestartBtn").GetComponent<Button>();
         exitBtn = GameObject.Find("ExitBtn").GetComponent<Button>();
-        image = GameObject.FindGameObjectWithTag("resultImage").GetComponent<Image>();
+        fail = GameObject.Find("Fail");
         initUiComponent();
         restartBtn.onClick.AddListener(restartGame);
         exitBtn.onClick.AddListener(exitGame);
@@ -29,7 +29,7 @@ public class FailUI : MonoBehaviour
         // 游戏闯关成功
         if (gameResult == 2)
         {
-            image.sprite = Resources.Load<Sprite>("Image/success");
+            fail.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/success");
         }
     }
 
